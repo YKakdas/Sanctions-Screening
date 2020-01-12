@@ -1,0 +1,54 @@
+<div id="page">
+<title>XML PARSER-Yasar Can Kakdas</title>
+  <center><h1 style="color:red; font-style:italic;">Sanctions Screening</h1></center>
+    
+  <form id="search" action="search" method="post">
+        <center><textarea style="background-color:#9ae5c2;" name="input1" placeholder="You can enter first name here..." rows="3" cols="20"></textarea></center>
+        <br>
+        <center><textarea style="background-color:#9ae5c2;" name="input2" placeholder="You can enter last name here..." rows="3" cols="20"></textarea></center>
+        <br>
+        <center><input type="submit" style="height:30px; width:100px; background-color:#FFCC99; font-size:larger"></center>
+        <br>
+        <center><h2>Search Result</h2></center>
+      <style>
+            body {
+                  background-color:powderblue;
+            }
+            table, th, td {
+            border: 2px solid black;
+            }
+      </style>
+      <body>
+        <center><table style="width:30%">
+            <tr>
+                  <th bgcolor="#ccff99">Id</th>
+                  <th bgcolor="#ccff99">First Name</th>
+                  <th bgcolor="#ccff99">Last Name</th>
+            </tr>
+                  {{#result}}
+                  <pre>{{{.}}}</pre>
+                  {{/result}}
+                  
+         <center></table></center>
+      </body>
+        
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+            <script type="text/javascript">
+                  $(document).ready(function() {
+                        var form = $('#search');
+                        form.submit(function(e) {
+                              $.ajax({
+                                    type: form.attr('method'),
+                                    url: form.attr('action'),
+                                    data: form.serialize(),
+                                    success: function(data) {
+                                          $('#page').html(data);
+                                    }
+                              });
+                              e.preventDefault();
+                        });
+                  });
+            </script>
+  </div>
